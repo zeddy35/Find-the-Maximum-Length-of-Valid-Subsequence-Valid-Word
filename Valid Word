@@ -1,0 +1,25 @@
+/**
+ * @param {string} word
+ * @return {boolean}
+ */
+var isValid = function(word) {
+    // min 3 karakter. !
+    // 0-9 ve İngilizce harfler. !
+    // bir adet sesli harf
+    // bir adet sessiz harf
+    //
+    // word adında bir string return true
+
+    if (word.length < 3) return false;
+
+    if (!/^[a-zA-Z0-9]+$/.test(word)) return false;
+
+    const vowel = /[aeiouAEIOU]/;
+    const consonant = /[b-df-hj-np-tv-zB-DF-HJ-NP-TV-Z]/;
+
+    if (!vowel.test(word)) return false;
+
+    if (!consonant.test(word)) return false;
+
+    return true;
+};
