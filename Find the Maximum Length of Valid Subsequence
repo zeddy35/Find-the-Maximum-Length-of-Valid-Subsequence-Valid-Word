@@ -1,25 +1,26 @@
 /**
- * @param {string} word
- * @return {boolean}
+ * @param {number[]} nums
+ * @return {number}
  */
-var isValid = function(word) {
-    // min 3 karakter. !
-    // 0-9 ve İngilizce harfler. !
-    // bir adet sesli harf
-    // bir adet sessiz harf
-    //
-    // word adında bir string return true
+var maximumLength = function(nums) {
 
-    if (word.length < 3) return false;
+    const evens = nums.filter(n => n % 2 === 0).length;
 
-    if (!/^[a-zA-Z0-9]+$/.test(word)) return false;
+    const odds = nums.filter(n => n % 2 !== 0).length;
 
-    const vowel = /[aeiouAEIOU]/;
-    const consonant = /[b-df-hj-np-tv-zB-DF-HJ-NP-TV-Z]/;
+    let altLength = 0;
+    if (nums.length > 0) {
 
-    if (!vowel.test(word)) return false;
+        altLength = 1;
+        let lastParity = nums[0] % 2;
 
-    if (!consonant.test(word)) return false;
+        for(let i = 1; i < nums.length; i++) {
+            if (lastParity !== nums[i] % 2) {
+                altLength++;
+                lastParity = nums[i] % 2;
+            }
+        }
+    }
 
-    return true;
+    return Math.max(odds, evens, altLength);
 };
